@@ -16,6 +16,18 @@ const clearErrors = () => {
   });
 };
 
+const validateDate = (field, value) => {
+  if (!value) {
+    showError(field, "日付を入力してください。");
+    return false;
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+    showError(field, "YYYY-MM-DD形式で入力してください。");
+    return false;
+  }
+  return true;
+};
+
 const validate = (values) => {
   let valid = true;
 
@@ -43,11 +55,11 @@ const validate = (values) => {
     valid = false;
   }
 
-  if (!values.date) {
-    showError("date", "日付を入力してください。");
+  if (!validateDate("date", values.date)) {
     valid = false;
-  } else if (!/^\d{4}-\d{2}-\d{2}$/.test(values.date)) {
-    showError("date", "YYYY-MM-DD形式で入力してください。");
+  }
+
+  if (!validateDate("date2", values.date2)) {
     valid = false;
   }
 
@@ -63,6 +75,7 @@ form.addEventListener("submit", (event) => {
     age: form.age.value.trim(),
     bool: form.bool.value,
     date: form.date.value,
+    date2: form.date2.value,
   };
 
   if (!validate(values)) {
@@ -75,6 +88,7 @@ form.addEventListener("submit", (event) => {
     age: Number(values.age),
     bool: values.bool === "true",
     date: values.date,
+    date2: values.date2,
   };
 
   output.textContent = JSON.stringify(payload, null, 2);

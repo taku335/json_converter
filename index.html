@@ -13,43 +13,51 @@
       <p>各カラムに値を入力して、JSON形式を生成します。</p>
     </header>
 
-    <form id="converter-form" novalidate>
-      <div class="field">
-        <label for="name">name（日本語文字列）</label>
-        <input id="name" name="name" type="text" placeholder="例：山田 太郎" />
-        <small class="hint">禁止文字: &lt; &gt; " ' &amp;</small>
-        <p class="error" data-error-for="name"></p>
-      </div>
+    <div class="content-split">
+      <form id="converter-form" novalidate>
+        <div class="field">
+          <label for="name">name（日本語文字列）</label>
+          <input id="name" name="name" type="text" placeholder="例：山田 太郎" />
+          <small class="hint">禁止文字: &lt; &gt; " ' &amp;</small>
+          <p class="error" data-error-for="name"></p>
+        </div>
 
-      <div class="field">
-        <label for="age">age（数字）</label>
-        <input id="age" name="age" type="text" inputmode="numeric" placeholder="例：30" />
-        <p class="error" data-error-for="age"></p>
-      </div>
+        <div class="field">
+          <label for="age">age（数字）</label>
+          <input id="age" name="age" type="text" inputmode="numeric" placeholder="例：30" />
+          <p class="error" data-error-for="age"></p>
+        </div>
 
-      <div class="field">
-        <label for="bool">bool（true / false）</label>
-        <select id="bool" name="bool">
-          <option value="">選択してください</option>
-          <option value="true">true</option>
-          <option value="false">false</option>
-        </select>
-        <p class="error" data-error-for="bool"></p>
-      </div>
+        <div class="field">
+          <label for="bool">bool（true / false）</label>
+          <select id="bool" name="bool">
+            <option value="">選択してください</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+          <p class="error" data-error-for="bool"></p>
+        </div>
 
-      <div class="field">
-        <label for="date">日付（YYYY-MM-DD）</label>
-        <input id="date" name="date" type="date" />
-        <p class="error" data-error-for="date"></p>
-      </div>
+        <div class="field">
+          <label for="date">日付（YYYY-MM-DD）</label>
+          <input id="date" name="date" type="date" />
+          <p class="error" data-error-for="date"></p>
+        </div>
 
-      <button type="submit">生成</button>
-    </form>
+        <div class="field">
+          <label for="date2">日付2（YYYY-MM-DD）</label>
+          <input id="date2" name="date2" type="date" />
+          <p class="error" data-error-for="date2"></p>
+        </div>
 
-    <section class="output">
-      <h2>JSON 出力</h2>
-      <pre id="json-output">ここに結果が表示されます。</pre>
-    </section>
+        <button type="submit">生成</button>
+      </form>
+
+      <section class="output">
+        <h2>JSON 出力</h2>
+        <pre id="json-output">ここに結果が表示されます。</pre>
+      </section>
+    </div>
   </main>
 
   <script src="script.js"></script>
