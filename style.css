@@ -15,7 +15,7 @@ body {
 }
 
 .container {
-  max-width: 720px;
+  width: 100%;
   margin: 0 auto;
   background: #ffffff;
   padding: 32px;
@@ -31,6 +31,13 @@ header h1 {
 header p {
   margin: 0 0 24px;
   color: #4b5563;
+}
+
+.content-split {
+  display: grid;
+  gap: 32px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
 }
 
 form {
@@ -92,7 +99,8 @@ button:hover {
 }
 
 .output {
-  margin-top: 32px;
+  display: grid;
+  gap: 12px;
 }
 
 .output pre {
@@ -102,4 +110,10 @@ button:hover {
   border-radius: 12px;
   overflow-x: auto;
   min-height: 120px;
+}
+
+@media (max-width: 900px) {
+  .content-split {
+    grid-template-columns: 1fr;
+  }
 }
