@@ -1,6 +1,7 @@
 const form = document.getElementById("converter-form");
 const output = document.getElementById("json-output");
 const forbiddenPattern = /[<>"'&]/;
+const environmentDependentPattern = /[\u2460-\u24ff\u2150-\u218f\u3200-\u32ff\u3300-\u33ff\ud83c\udd00-\ud83c\uddff]/u;
 const japanesePattern = /^[\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Han}\p{sc=Latin}\s]+$/u;
 
 const showError = (field, message) => {
@@ -36,6 +37,9 @@ const validate = (values) => {
     valid = false;
   } else if (forbiddenPattern.test(values.name)) {
     showError("name", "禁止文字が含まれています。");
+    valid = false;
+  } else if (environmentDependentPattern.test(values.name)) {
+    showError("name", "環境依存文字は使用できません。");
     valid = false;
   } else if (!japanesePattern.test(values.name)) {
     showError("name", "日本語の文字のみ入力してください。");
