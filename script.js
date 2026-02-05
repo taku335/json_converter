@@ -3,7 +3,7 @@ const output = document.getElementById("json-output");
 const submitButton = form.querySelector('button[type="submit"]');
 const forbiddenPattern = /[<>"'&]/;
 const environmentDependentPattern = /[\u2460-\u24ff\u2150-\u218f\u3200-\u32ff\u3300-\u33ff\ud83c\udd00-\ud83c\uddff]/u;
-const japanesePattern = /^[\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Han}\p{sc=Latin}\s]+$/u;
+const japanesePattern = /^[\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Han}\p{sc=Latin}\p{Nd}\s]+$/u;
 
 const touchedFields = new Set();
 
@@ -60,7 +60,7 @@ const validate = (values, { allowEmpty, showErrors = true, showUntouchedRequired
     valid = false;
   } else if (!japanesePattern.test(values.name)) {
     if (showErrors) {
-      showError("name", "日本語の文字のみ入力してください。");
+      showError("name", "日本語の文字と数字のみ入力してください。");
     }
     valid = false;
   }
