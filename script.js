@@ -20,9 +20,9 @@ const clearErrors = () => {
   });
 };
 
-const validateDate = (field, value, { allowEmpty, showErrors = true } = {}) => {
+const validateDate = (field, value, { allowEmpty, showErrors = true, showUntouchedRequired = true } = {}) => {
   if (!value) {
-    if (!allowEmpty) {
+    if (!allowEmpty && (showUntouchedRequired || touchedFields.has(field))) {
       if (showErrors) {
         showError(field, "日付を入力してください。");
       }
@@ -38,11 +38,11 @@ const validateDate = (field, value, { allowEmpty, showErrors = true } = {}) => {
   return true;
 };
 
-const validate = (values, { allowEmpty, showErrors = true } = {}) => {
+const validate = (values, { allowEmpty, showErrors = true, showUntouchedRequired = true } = {}) => {
   let valid = true;
 
   if (!values.name) {
-    if (!allowEmpty) {
+    if (!allowEmpty && (showUntouchedRequired || touchedFields.has("name"))) {
       if (showErrors) {
         showError("name", "名前を入力してください。");
       }
@@ -66,7 +66,7 @@ const validate = (values, { allowEmpty, showErrors = true } = {}) => {
   }
 
   if (!values.age) {
-    if (!allowEmpty) {
+    if (!allowEmpty && (showUntouchedRequired || touchedFields.has("age"))) {
       if (showErrors) {
         showError("age", "年齢を入力してください。");
       }
@@ -80,7 +80,7 @@ const validate = (values, { allowEmpty, showErrors = true } = {}) => {
   }
 
   if (!values.bool) {
-    if (!allowEmpty) {
+    if (!allowEmpty && (showUntouchedRequired || touchedFields.has("bool"))) {
       if (showErrors) {
         showError("bool", "true か false を選択してください。");
       }
@@ -88,11 +88,11 @@ const validate = (values, { allowEmpty, showErrors = true } = {}) => {
     }
   }
 
-  if (!validateDate("date", values.date, { allowEmpty, showErrors })) {
+  if (!validateDate("date", values.date, { allowEmpty, showErrors, showUntouchedRequired })) {
     valid = false;
   }
 
-  if (!validateDate("date2", values.date2, { allowEmpty, showErrors })) {
+  if (!validateDate("date2", values.date2, { allowEmpty, showErrors, showUntouchedRequired })) {
     valid = false;
   }
 
@@ -121,7 +121,7 @@ const updateSubmitState = () => {
 const validateOnInput = (field) => {
   const values = getValues();
   clearErrors();
-  validate(values, { allowEmpty: !touchedFields.has(field) });
+  validate(values, { allowEmpty: false, showUntouchedRequired: false });
   updateSubmitState();
 };
 
