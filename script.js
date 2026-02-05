@@ -77,6 +77,14 @@ const validate = (values, { allowEmpty, showErrors = true, showUntouchedRequired
       showError("age", "数字のみ入力してください。");
     }
     valid = false;
+  } else {
+    const ageNumber = Number(values.age);
+    if (ageNumber < 1 || ageNumber > 10000) {
+      if (showErrors) {
+        showError("age", "1〜10000の範囲で入力してください。");
+      }
+      valid = false;
+    }
   }
 
   if (!values.bool) {
