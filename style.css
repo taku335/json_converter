@@ -140,6 +140,7 @@ button:disabled {
   border-radius: 12px;
   overflow-x: auto;
   min-height: 120px;
+  font-size: 15px;
 }
 
 @media (max-width: 900px) {
