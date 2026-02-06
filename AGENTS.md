@@ -1,42 +1,42 @@
-# Repository Guidelines
+# リポジトリ運用ガイドライン
 
-## Project Structure & Module Organization
-This repository is a small static web app. All source files live at the repo root:
-- `index.html` contains the markup and form layout.
-- `style.css` holds the global styles and responsive layout.
-- `script.js` implements validation and JSON output logic.
-There are no separate build or test directories, and no bundled assets.
+## プロジェクト構成とモジュール構成
+このリポジトリは小さな静的Webアプリです。すべてのソースファイルはリポジトリ直下にあります。
+- `index.html` にはマークアップとフォームのレイアウトが含まれます。
+- `style.css` には全体のスタイルとレスポンシブレイアウトが含まれます。
+- `script.js` はバリデーションとJSON出力のロジックを実装します。
+個別のビルド/テスト用ディレクトリや、バンドルされたアセットはありません。
 
-## Build, Test, and Development Commands
-There is no build step. Open `index.html` directly in a browser for quick checks. For a local server (recommended for consistent behavior), use:
-- `python -m http.server 8000` to serve the site and avoid file URL quirks.
-No automated test command exists in this repository.
+## ビルド・テスト・開発コマンド
+ビルド手順はありません。簡易確認はブラウザで `index.html` を直接開いてください。ローカルサーバー（挙動の一貫性のため推奨）を使う場合は次を使用します。
+- `python -m http.server 8000` でサイトを配信し、file URL特有の挙動を避けます。
+このリポジトリには自動テストコマンドはありません。
 
-## Coding Style & Naming Conventions
-Keep formatting consistent with the existing files:
-- Indentation uses 2 spaces in HTML, CSS, and JS.
-- JavaScript uses `const`/`let`, semicolons, and double quotes.
-- CSS class names are lowercase with hyphens (e.g., `content-split`).
-- JavaScript identifiers are `camelCase` (e.g., `submitButton`).
-If you introduce tooling (formatter/linter), document it here and in `README.md`.
+## コーディングスタイルと命名規則
+既存のファイルと同じフォーマットを保ってください。
+- HTML/CSS/JSはインデント2スペース。
+- JavaScriptは `const`/`let`、セミコロン、ダブルクォートを使用。
+- CSSクラス名は小文字＋ハイフン（例: `content-split`）。
+- JavaScriptの識別子は `camelCase`（例: `submitButton`）。
+ツール（フォーマッター/リンター）を導入する場合は、ここおよび `README.md` に記載してください。
 
-## Testing Guidelines
-There is no testing framework configured. Changes should be manually validated in the UI:
-- Enter valid/invalid inputs and confirm inline errors.
-- Verify JSON output formatting in the preview pane.
-If you add tests, prefer a lightweight setup and document how to run them.
+## テストガイドライン
+テストフレームワークは設定されていません。変更はUIで手動検証してください。
+- 正常/異常入力を行い、インラインエラーを確認。
+- プレビュー欄でJSON出力の整形を確認。
+テストを追加する場合は、軽量な構成を優先し、実行方法を記載してください。
 
-## Commit & Pull Request Guidelines
-Use a strict Conventional Commits format:
-- Format: `type(scope): summary` (scope is optional).
-- Allowed types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`.
-- Use present tense and keep summaries under 72 characters.
-- Examples: `fix(validation): reject environment-dependent chars`, `docs: add contribution guide`.
-Pull requests must:
-- Address a single feature or fix (no mixed concerns).
-- Include a brief summary, manual testing notes, and linked issue(s) when applicable.
-- Add before/after screenshots for UI changes.
-- Avoid WIP; the PR should be ready to merge.
+## コミットとプルリクエストのガイドライン
+Conventional Commits形式を厳格に使用してください。
+- 形式: `type(scope): summary`（scopeは任意）。
+- 許可されるtype: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`。
+- 現在形を使い、summaryは72文字以内。
+- 例: `fix(validation): reject environment-dependent chars`, `docs: add contribution guide`。
+プルリクエストは次を満たす必要があります。
+- 単一の機能または修正に限定（混在させない）。
+- 簡潔な概要、手動テストのメモ、必要に応じて関連Issueへのリンク。
+- UI変更にはBefore/Afterのスクリーンショットを追加。
+- WIPは避け、マージ可能な状態にする。
 
-## Configuration & Deployment Notes
-This is a static site suitable for GitHub Pages. Avoid introducing server-only dependencies unless the project scope changes.
+## 設定とデプロイに関する注意
+これはGitHub Pagesに適した静的サイトです。プロジェクトのスコープが変わらない限り、サーバー専用の依存関係は追加しないでください。
