@@ -116,13 +116,18 @@ const App = () => {
 
   return html`
     <${React.Fragment}>
-      <header>
+      <section className="tile tile-header">
         <h1>JSON Converter</h1>
         <p>各カラムに値を入力して、JSON形式を生成します。</p>
-      </header>
+      </section>
 
-      <div className="content-split">
-        <form id="converter-form" noValidate=${true} onSubmit=${handleSubmit}>
+      <div className="tile-grid">
+        <form
+          id="converter-form"
+          className="tile tile-form"
+          noValidate=${true}
+          onSubmit=${handleSubmit}
+        >
           <div className="field">
             <div className="field-header">
               <label htmlFor="name">name（日本語文字列・数字可）</label>
@@ -240,7 +245,7 @@ const App = () => {
           </div>
         </form>
 
-        <section className="output">
+        <section className="tile tile-output output">
           <h2>JSON 出力</h2>
           <p className="copy-status" id="copy-status" aria-live="polite">
             ${copyStatus}
