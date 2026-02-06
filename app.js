@@ -132,9 +132,6 @@ const App = () => {
             <div className="field-header">
               <label htmlFor="name">name（日本語文字列・数字可）</label>
               <div className="field-meta">
-                <small className="hint">
-                  禁止文字: &lt; &gt; " ' &amp; / 環境依存文字（① ㈱ ㍉ Ⅰ など）
-                </small>
                 <span className="error" data-error-for="name" aria-live="polite">
                   ${errors.name || ""}
                 </span>

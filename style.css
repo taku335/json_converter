@@ -38,6 +38,9 @@ body {
   gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 24px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .tile-header h1 {
@@ -53,9 +56,10 @@ body {
 
 .tile-grid {
   display: grid;
-  gap: 32px;
+  gap: 24px;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: start;
+  justify-content: center;
 }
 
 form {
@@ -111,8 +115,8 @@ select {
 
 .tile-form,
 .tile-output {
-  width: 85%;
-  justify-self: start;
+  width: 90%;
+  justify-self: center;
 }
 
 input:focus,
@@ -214,6 +218,7 @@ button:disabled {
   .tile-header {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .tile-grid {
