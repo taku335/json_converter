@@ -50,14 +50,14 @@
           <p class="error" data-error-for="date2"></p>
         </div>
 
-        <button type="submit">生成</button>
+        <div class="form-actions">
+          <button type="submit">生成</button>
+          <button type="button" class="copy-button" id="copy-json" disabled>コピー</button>
+        </div>
       </form>
 
       <section class="output">
-        <div class="output-header">
-          <h2>JSON 出力</h2>
-          <button type="button" class="copy-button" id="copy-json" disabled>コピー</button>
-        </div>
+        <h2>JSON 出力</h2>
         <p class="copy-status" id="copy-status" aria-live="polite"></p>
         <pre id="json-output">ここに結果が表示されます。</pre>
       </section>

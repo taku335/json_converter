@@ -108,6 +108,13 @@ const validate = (values, { allowEmpty, showErrors = true, showUntouchedRequired
     valid = false;
   }
 
+  if (values.date && values.date2 && values.date2 < values.date) {
+    if (showErrors) {
+      showError("date2", "日付1と同じ日付、または日付1より後の日付を入力してください。");
+    }
+    valid = false;
+  }
+
   return valid;
 };
 

@@ -45,6 +45,12 @@ form {
   gap: 20px;
 }
 
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
 .field {
   display: grid;
   gap: 8px;
@@ -107,13 +113,6 @@ button:disabled {
 
 .output {
   display: grid;
-  gap: 12px;
-}
-
-.output-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   gap: 12px;
 }
 
