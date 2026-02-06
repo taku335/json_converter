@@ -42,7 +42,7 @@ header p {
 
 form {
   display: grid;
-  gap: 20px;
+  gap: 14px;
 }
 
 .form-actions {
@@ -53,11 +53,28 @@ form {
 
 .field {
   display: grid;
-  gap: 8px;
+  gap: 6px;
+}
+
+.field-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
 }
 
 label {
   font-weight: 600;
+  margin: 0;
+}
+
+.field-meta {
+  margin-left: auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  text-align: right;
 }
 
 input,

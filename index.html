@@ -16,38 +16,58 @@
     <div class="content-split">
       <form id="converter-form" novalidate>
         <div class="field">
-          <label for="name">name（日本語文字列・数字可）</label>
+          <div class="field-header">
+            <label for="name">name（日本語文字列・数字可）</label>
+            <div class="field-meta">
+              <small class="hint">禁止文字: &lt; &gt; " ' &amp; / 環境依存文字（① ㈱ ㍉ Ⅰ など）</small>
+              <span class="error" data-error-for="name" aria-live="polite"></span>
+            </div>
+          </div>
           <input id="name" name="name" type="text" placeholder="例：山田 太郎" />
-          <small class="hint">禁止文字: &lt; &gt; " ' &amp; / 環境依存文字（① ㈱ ㍉ Ⅰ など）</small>
-          <p class="error" data-error-for="name"></p>
         </div>
 
         <div class="field">
-          <label for="age">age（1〜10000の数字）</label>
+          <div class="field-header">
+            <label for="age">age（1〜10000の数字）</label>
+            <div class="field-meta">
+              <span class="error" data-error-for="age" aria-live="polite"></span>
+            </div>
+          </div>
           <input id="age" name="age" type="text" inputmode="numeric" placeholder="例：30" />
-          <p class="error" data-error-for="age"></p>
         </div>
 
         <div class="field">
-          <label for="bool">bool（true / false）</label>
+          <div class="field-header">
+            <label for="bool">bool（true / false）</label>
+            <div class="field-meta">
+              <span class="error" data-error-for="bool" aria-live="polite"></span>
+            </div>
+          </div>
           <select id="bool" name="bool">
             <option value="">選択してください</option>
             <option value="true">true</option>
             <option value="false">false</option>
           </select>
-          <p class="error" data-error-for="bool"></p>
         </div>
 
         <div class="field">
-          <label for="date">日付1（YYYY-MM-DD）</label>
+          <div class="field-header">
+            <label for="date">日付1（YYYY-MM-DD）</label>
+            <div class="field-meta">
+              <span class="error" data-error-for="date" aria-live="polite"></span>
+            </div>
+          </div>
           <input id="date" name="date" type="date" />
-          <p class="error" data-error-for="date"></p>
         </div>
 
         <div class="field">
-          <label for="date2">日付2（YYYY-MM-DD）</label>
+          <div class="field-header">
+            <label for="date2">日付2（YYYY-MM-DD）</label>
+            <div class="field-meta">
+              <span class="error" data-error-for="date2" aria-live="polite"></span>
+            </div>
+          </div>
           <input id="date2" name="date2" type="date" />
-          <p class="error" data-error-for="date2"></p>
         </div>
 
         <div class="form-actions">
