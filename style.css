@@ -104,6 +104,10 @@ select {
   font-size: 16px;
 }
 
+input[type="date"] {
+  width: 50%;
+}
+
 input:focus,
 select:focus {
   outline: 2px solid #2563eb;
