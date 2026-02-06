@@ -38,7 +38,7 @@ body {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 16px;
-  width: 90%;
+  width: 85%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -56,10 +56,12 @@ body {
 
 .tile-grid {
   display: grid;
-  gap: 12px;
+  gap: 4px;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: start;
   justify-content: center;
+  width: 92%;
+  margin: 0 auto;
 }
 
 form {
@@ -128,14 +130,13 @@ select {
 }
 
 .tile-form {
-  width: 88%;
-  justify-self: center;
-
+  width: 82%;
+  justify-self: end;
 }
 
 .tile-output {
-  width: 100%;
-  justify-self: center;
+  width: 90%;
+  justify-self: start;
 }
 
 input:focus,
@@ -242,11 +243,13 @@ button:disabled {
 
   .tile-grid {
     grid-template-columns: 1fr;
+    width: 100%;
   }
 
   .tile-form,
   .tile-output {
     width: 100%;
+    justify-self: stretch;
   }
 
   .field {
