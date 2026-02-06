@@ -38,7 +38,7 @@ body {
   gap: 12px;
   flex-wrap: wrap;
   margin-bottom: 16px;
-  width: 85%;
+  width: 92%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -130,13 +130,13 @@ select {
 }
 
 .tile-form {
-  width: 88%;
-  justify-self: end;
+  width: 100%;
+  justify-self: stretch;
 }
 
 .tile-output {
-  width: 90%;
-  justify-self: start;
+  width: 100%;
+  justify-self: stretch;
 }
 
 input:focus,
