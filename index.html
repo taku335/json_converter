@@ -7,83 +7,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="container">
-    <header>
-      <h1>JSON Converter</h1>
-      <p>各カラムに値を入力して、JSON形式を生成します。</p>
-    </header>
+  <main id="app" class="container"></main>
 
-    <div class="content-split">
-      <form id="converter-form" novalidate>
-        <div class="field">
-          <div class="field-header">
-            <label for="name">name（日本語文字列・数字可）</label>
-            <div class="field-meta">
-              <small class="hint">禁止文字: &lt; &gt; " ' &amp; / 環境依存文字（① ㈱ ㍉ Ⅰ など）</small>
-              <span class="error" data-error-for="name" aria-live="polite"></span>
-            </div>
-          </div>
-          <input id="name" name="name" type="text" placeholder="例：山田 太郎" />
-        </div>
-
-        <div class="field">
-          <div class="field-header">
-            <label for="age">age（1〜10000の数字）</label>
-            <div class="field-meta">
-              <span class="error" data-error-for="age" aria-live="polite"></span>
-            </div>
-          </div>
-          <input id="age" name="age" type="text" inputmode="numeric" placeholder="例：30" />
-        </div>
-
-        <div class="field">
-          <div class="field-header">
-            <label for="bool">bool（true / false）</label>
-            <div class="field-meta">
-              <span class="error" data-error-for="bool" aria-live="polite"></span>
-            </div>
-          </div>
-          <select id="bool" name="bool">
-            <option value="">選択してください</option>
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <div class="field-header">
-            <label for="date">日付1（YYYY-MM-DD）</label>
-            <div class="field-meta">
-              <span class="error" data-error-for="date" aria-live="polite"></span>
-            </div>
-          </div>
-          <input id="date" name="date" type="date" />
-        </div>
-
-        <div class="field">
-          <div class="field-header">
-            <label for="date2">日付2（YYYY-MM-DD）</label>
-            <div class="field-meta">
-              <span class="error" data-error-for="date2" aria-live="polite"></span>
-            </div>
-          </div>
-          <input id="date2" name="date2" type="date" />
-        </div>
-
-        <div class="form-actions">
-          <button type="submit">生成</button>
-          <button type="button" class="copy-button" id="copy-json" disabled>コピー</button>
-        </div>
-      </form>
-
-      <section class="output">
-        <h2>JSON 出力</h2>
-        <p class="copy-status" id="copy-status" aria-live="polite"></p>
-        <pre id="json-output">ここに結果が表示されます。</pre>
-      </section>
-    </div>
-  </main>
-
-  <script src="script.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
