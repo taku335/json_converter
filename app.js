@@ -232,8 +232,19 @@ const App = () => {
             />
           </div>
 
-          <div className="form-actions">
-            <button type="submit" disabled=${!formValid}>生成</button>
+        </form>
+
+        <section className="tile tile-output output">
+          <h2>JSON 出力</h2>
+          <pre id="json-output">${output}</pre>
+          <div className="output-actions">
+            <button
+              type="submit"
+              form="converter-form"
+              disabled=${!formValid}
+            >
+              生成
+            </button>
             <button
               type="button"
               className="copy-button"
@@ -242,15 +253,10 @@ const App = () => {
             >
               コピー
             </button>
+            <p className="copy-status" id="copy-status" aria-live="polite">
+              ${copyStatus}
+            </p>
           </div>
-        </form>
-
-        <section className="tile tile-output output">
-          <h2>JSON 出力</h2>
-          <p className="copy-status" id="copy-status" aria-live="polite">
-            ${copyStatus}
-          </p>
-          <pre id="json-output">${output}</pre>
         </section>
       </div>
     </${React.Fragment}>
