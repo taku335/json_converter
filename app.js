@@ -238,21 +238,23 @@ const App = () => {
           <h2>JSON 出力</h2>
           <pre id="json-output">${output}</pre>
           <div className="output-actions">
-            <button
-              type="submit"
-              form="converter-form"
-              disabled=${!formValid}
-            >
-              生成
-            </button>
-            <button
-              type="button"
-              className="copy-button"
-              onClick=${handleCopy}
-              disabled=${!isJsonOutput}
-            >
-              コピー
-            </button>
+            <div className="button-row">
+              <button
+                type="submit"
+                form="converter-form"
+                disabled=${!formValid}
+              >
+                生成
+              </button>
+              <button
+                type="button"
+                className="copy-button"
+                onClick=${handleCopy}
+                disabled=${!isJsonOutput}
+              >
+                コピー
+              </button>
+            </div>
             <p className="copy-status" id="copy-status" aria-live="polite">
               ${copyStatus}
             </p>
