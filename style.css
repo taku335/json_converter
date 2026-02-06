@@ -110,6 +110,30 @@ button:disabled {
   gap: 12px;
 }
 
+.output-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.copy-button {
+  padding: 8px 18px;
+  font-size: 14px;
+  background: #0f172a;
+}
+
+.copy-button:hover {
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.35);
+}
+
+.copy-status {
+  margin: 0;
+  color: #2563eb;
+  font-size: 13px;
+  min-height: 1.2em;
+}
+
 .output pre {
   background: #111827;
   color: #f9fafb;

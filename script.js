@@ -1,11 +1,15 @@
 const form = document.getElementById("converter-form");
 const output = document.getElementById("json-output");
 const submitButton = form.querySelector('button[type="submit"]');
+const copyButton = document.getElementById("copy-json");
+const copyStatus = document.getElementById("copy-status");
 const forbiddenPattern = /[<>"'&]/;
 const environmentDependentPattern = /[\u2460-\u24ff\u2150-\u218f\u3200-\u32ff\u3300-\u33ff\ud83c\udd00-\ud83c\uddff]/u;
 const japanesePattern = /^[\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Han}\p{sc=Latin}\p{Nd}\s]+$/u;
 
 const touchedFields = new Set();
+let isJsonOutput = false;
+let copyTimeoutId = null;
 
 const showError = (field, message) => {
   const error = document.querySelector(`[data-error-for="${field}"]`);
@@ -121,9 +125,14 @@ const updateSubmitState = () => {
   submitButton.disabled = !valid;
   if (!valid && touchedFields.size > 0) {
     output.textContent = "入力内容を確認してください。";
+    isJsonOutput = false;
+    copyStatus.textContent = "";
   } else if (valid) {
     output.textContent = "ここに結果が表示されます。";
+    isJsonOutput = false;
+    copyStatus.textContent = "";
   }
+  copyButton.disabled = !isJsonOutput;
 };
 
 const validateOnInput = (field) => {
@@ -157,6 +166,9 @@ form.addEventListener("submit", (event) => {
 
   if (!validate(values)) {
     output.textContent = "入力内容を確認してください。";
+    isJsonOutput = false;
+    copyStatus.textContent = "";
+    copyButton.disabled = true;
     return;
   }
 
@@ -169,6 +181,50 @@ form.addEventListener("submit", (event) => {
   };
 
   output.textContent = JSON.stringify(payload, null, 2);
+  isJsonOutput = true;
+  copyStatus.textContent = "";
+  copyButton.disabled = false;
 });
 
 updateSubmitState();
+
+const copyText = async (text) => {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "absolute";
+  textarea.style.left = "-9999px";
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand("copy");
+  document.body.removeChild(textarea);
+  if (!copied) {
+    throw new Error("Copy failed");
+  }
+};
+
+copyButton.addEventListener("click", async () => {
+  if (!isJsonOutput) {
+    return;
+  }
+
+  try {
+    await copyText(output.textContent);
+    copyStatus.textContent = "コピーしました。";
+  } catch (error) {
+    copyStatus.textContent = "コピーに失敗しました。";
+  }
+
+  if (copyTimeoutId) {
+    clearTimeout(copyTimeoutId);
+  }
+  copyTimeoutId = setTimeout(() => {
+    copyStatus.textContent = "";
+    copyTimeoutId = null;
+  }, 2000);
+});

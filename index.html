@@ -54,7 +54,11 @@
       </form>
 
       <section class="output">
-        <h2>JSON 出力</h2>
+        <div class="output-header">
+          <h2>JSON 出力</h2>
+          <button type="button" class="copy-button" id="copy-json" disabled>コピー</button>
+        </div>
+        <p class="copy-status" id="copy-status" aria-live="polite"></p>
         <pre id="json-output">ここに結果が表示されます。</pre>
       </section>
     </div>
