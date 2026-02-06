@@ -108,6 +108,10 @@ input[type="date"] {
   width: 50%;
 }
 
+select#bool {
+  width: 50%;
+}
+
 input:focus,
 select:focus {
   outline: 2px solid #2563eb;
