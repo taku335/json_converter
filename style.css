@@ -76,6 +76,8 @@ form {
 .field {
   display: grid;
   gap: 4px;
+  width: 50%;
+  justify-self: start;
 }
 
 .field-header {
@@ -89,16 +91,6 @@ label {
   margin: 0;
 }
 
-.field-meta {
-  margin-left: auto;
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-end;
-  gap: 8px;
-  flex-wrap: wrap;
-  text-align: right;
-}
-
 input,
 select {
   width: 100%;
@@ -108,14 +100,41 @@ select {
   font-size: 16px;
 }
 
-.field input,
-.field select {
-  width: 50%;
+.input-shell {
+  position: relative;
+  width: 100%;
 }
 
-.tile-form,
+.input-shell input,
+.input-shell select {
+  width: 100%;
+}
+
+.input-shell[data-error="true"] input,
+.input-shell[data-error="true"] select {
+  border-color: #dc2626;
+  padding-bottom: 24px;
+}
+
+.input-error {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 6px;
+  color: #dc2626;
+  font-size: 11px;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.tile-form {
+  width: 88%;
+  justify-self: center;
+
+}
+
 .tile-output {
-  width: 96%;
+  width: 100%;
   justify-self: center;
 }
 
@@ -227,6 +246,10 @@ button:disabled {
 
   .tile-form,
   .tile-output {
+    width: 100%;
+  }
+
+  .field {
     width: 100%;
   }
 }

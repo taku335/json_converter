@@ -9,6 +9,7 @@ const App = () => {
   const [values, setValues] = useState(initialValues);
   const [touchedFields, setTouchedFields] = useState({});
   const [errors, setErrors] = useState({});
+  const [showAllErrors, setShowAllErrors] = useState(false);
   const [output, setOutput] = useState("ここに結果が表示されます。");
   const [isJsonOutput, setIsJsonOutput] = useState(false);
   const [copyStatus, setCopyStatus] = useState("");
@@ -33,13 +34,16 @@ const App = () => {
     const validation = getValidation(nextValues, {
       allowEmpty: false,
       showErrors: true,
-      showUntouchedRequired: false,
+      showUntouchedRequired: showAllErrors,
       touchedFields: nextTouched,
     });
     setErrors(validation.errors);
 
     const submitValidation = getValidation(nextValues, { showErrors: false });
     resetOutputState(submitValidation.valid, Object.keys(nextTouched).length);
+    if (submitValidation.valid && showAllErrors) {
+      setShowAllErrors(false);
+    }
   };
 
   const handleChange = (event) => {
@@ -64,7 +68,11 @@ const App = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const validation = getValidation(values, { showErrors: true });
+    setShowAllErrors(true);
+    const validation = getValidation(values, {
+      showErrors: true,
+      showUntouchedRequired: true,
+    });
     setErrors(validation.errors);
 
     if (!validation.valid) {
@@ -74,6 +82,7 @@ const App = () => {
       return;
     }
 
+    setShowAllErrors(false);
     const payload = {
       name: validation.normalized.name,
       age: Number(validation.normalized.age),
@@ -131,102 +140,102 @@ const App = () => {
           <div className="field">
             <div className="field-header">
               <label htmlFor="name">name（日本語文字列・数字可）</label>
-              <div className="field-meta">
-                <span className="error" data-error-for="name" aria-live="polite">
-                  ${errors.name || ""}
-                </span>
-              </div>
             </div>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              placeholder="例：山田 太郎"
-              value=${values.name}
-              onChange=${handleChange}
-              onBlur=${handleBlur}
-            />
+            <div className="input-shell" data-error=${!!errors.name}>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="例：山田 太郎"
+                value=${values.name}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.name || ""}
+              </span>
+            </div>
           </div>
 
           <div className="field">
             <div className="field-header">
               <label htmlFor="age">age（1〜10000の数字）</label>
-              <div className="field-meta">
-                <span className="error" data-error-for="age" aria-live="polite">
-                  ${errors.age || ""}
-                </span>
-              </div>
             </div>
-            <input
-              id="age"
-              name="age"
-              type="text"
-              inputMode="numeric"
-              placeholder="例：30"
-              value=${values.age}
-              onChange=${handleChange}
-              onBlur=${handleBlur}
-            />
+            <div className="input-shell" data-error=${!!errors.age}>
+              <input
+                id="age"
+                name="age"
+                type="text"
+                inputMode="numeric"
+                placeholder="例：30"
+                value=${values.age}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.age || ""}
+              </span>
+            </div>
           </div>
 
           <div className="field">
             <div className="field-header">
               <label htmlFor="bool">bool（true / false）</label>
-              <div className="field-meta">
-                <span className="error" data-error-for="bool" aria-live="polite">
-                  ${errors.bool || ""}
-                </span>
-              </div>
             </div>
-            <select
-              id="bool"
-              name="bool"
-              value=${values.bool}
-              onChange=${handleChange}
-              onBlur=${handleBlur}
-            >
-              <option value="">選択してください</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select>
+            <div className="input-shell" data-error=${!!errors.bool}>
+              <select
+                id="bool"
+                name="bool"
+                value=${values.bool}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              >
+                <option value="">選択してください</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <span className="input-error" aria-live="polite">
+                ${errors.bool || ""}
+              </span>
+            </div>
           </div>
 
           <div className="field">
             <div className="field-header">
               <label htmlFor="date">日付1（YYYY-MM-DD）</label>
-              <div className="field-meta">
-                <span className="error" data-error-for="date" aria-live="polite">
-                  ${errors.date || ""}
-                </span>
-              </div>
             </div>
-            <input
-              id="date"
-              name="date"
-              type="date"
-              value=${values.date}
-              onChange=${handleChange}
-              onBlur=${handleBlur}
-            />
+            <div className="input-shell" data-error=${!!errors.date}>
+              <input
+                id="date"
+                name="date"
+                type="date"
+                value=${values.date}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.date || ""}
+              </span>
+            </div>
           </div>
 
           <div className="field">
             <div className="field-header">
               <label htmlFor="date2">日付2（YYYY-MM-DD）</label>
-              <div className="field-meta">
-                <span className="error" data-error-for="date2" aria-live="polite">
-                  ${errors.date2 || ""}
-                </span>
-              </div>
             </div>
-            <input
-              id="date2"
-              name="date2"
-              type="date"
-              value=${values.date2}
-              onChange=${handleChange}
-              onBlur=${handleBlur}
-            />
+            <div className="input-shell" data-error=${!!errors.date2}>
+              <input
+                id="date2"
+                name="date2"
+                type="date"
+                value=${values.date2}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.date2 || ""}
+              </span>
+            </div>
           </div>
 
         </form>
