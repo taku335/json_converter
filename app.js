@@ -84,11 +84,12 @@ const App = () => {
 
     setShowAllErrors(false);
     const payload = {
-      name: validation.normalized.name,
-      age: Number(validation.normalized.age),
-      bool: validation.normalized.bool === "true",
-      date: validation.normalized.date,
-      date2: validation.normalized.date2,
+      customer_name: validation.normalized.name,
+      winners: Number(validation.normalized.winners),
+      from_date: validation.normalized.fromDate,
+      to_date: validation.normalized.toDate,
+      pool_size: Number(validation.normalized.poolSize),
+      open: validation.normalized.open === "true",
     };
 
     setOutput(JSON.stringify(payload, null, 2));
@@ -159,81 +160,102 @@ const App = () => {
 
           <div className="field">
             <div className="field-header">
-              <label htmlFor="age">age（1〜10000の数字）</label>
+              <label htmlFor="winners">プレゼント数（0〜10000の整数）</label>
             </div>
-            <div className="input-shell" data-error=${!!errors.age}>
+            <div className="input-shell" data-error=${!!errors.winners}>
               <input
-                id="age"
-                name="age"
+                id="winners"
+                name="winners"
                 type="text"
                 inputMode="numeric"
-                placeholder="例：30"
-                value=${values.age}
+                placeholder="例：0"
+                value=${values.winners}
                 onChange=${handleChange}
                 onBlur=${handleBlur}
               />
               <span className="input-error" aria-live="polite">
-                ${errors.age || ""}
+                ${errors.winners || ""}
               </span>
             </div>
           </div>
 
           <div className="field">
             <div className="field-header">
-              <label htmlFor="bool">bool（true / false）</label>
+              <label htmlFor="fromDate">開始日（YYYY-MM-DD）</label>
             </div>
-            <div className="input-shell" data-error=${!!errors.bool}>
+            <div className="input-shell" data-error=${!!errors.fromDate}>
+              <input
+                id="fromDate"
+                name="fromDate"
+                type="date"
+                value=${values.fromDate}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.fromDate || ""}
+              </span>
+            </div>
+          </div>
+
+          <div className="field">
+            <div className="field-header">
+              <label htmlFor="toDate">終了日（YYYY-MM-DD）</label>
+            </div>
+            <div className="input-shell" data-error=${!!errors.toDate}>
+              <input
+                id="toDate"
+                name="toDate"
+                type="date"
+                value=${values.toDate}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.toDate || ""}
+              </span>
+            </div>
+          </div>
+
+          <div className="field">
+            <div className="field-header">
+              <label htmlFor="poolSize">人数枠（1〜10000の整数）</label>
+            </div>
+            <div className="input-shell" data-error=${!!errors.poolSize}>
+              <input
+                id="poolSize"
+                name="poolSize"
+                type="text"
+                inputMode="numeric"
+                placeholder="例：10000"
+                value=${values.poolSize}
+                onChange=${handleChange}
+                onBlur=${handleBlur}
+              />
+              <span className="input-error" aria-live="polite">
+                ${errors.poolSize || ""}
+              </span>
+            </div>
+          </div>
+
+          <div className="field">
+            <div className="field-header">
+              <label htmlFor="open">open（オープン: true / クローズ: false）</label>
+            </div>
+            <div className="input-shell" data-error=${!!errors.open}>
               <select
-                id="bool"
-                name="bool"
-                value=${values.bool}
+                id="open"
+                name="open"
+                value=${values.open}
                 onChange=${handleChange}
                 onBlur=${handleBlur}
               >
                 <option value="">選択してください</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
+                <option value="true">true（オープン）</option>
+                <option value="false">false（クローズ）</option>
               </select>
               <span className="input-error" aria-live="polite">
-                ${errors.bool || ""}
-              </span>
-            </div>
-          </div>
-
-          <div className="field">
-            <div className="field-header">
-              <label htmlFor="date">日付1（YYYY-MM-DD）</label>
-            </div>
-            <div className="input-shell" data-error=${!!errors.date}>
-              <input
-                id="date"
-                name="date"
-                type="date"
-                value=${values.date}
-                onChange=${handleChange}
-                onBlur=${handleBlur}
-              />
-              <span className="input-error" aria-live="polite">
-                ${errors.date || ""}
-              </span>
-            </div>
-          </div>
-
-          <div className="field">
-            <div className="field-header">
-              <label htmlFor="date2">日付2（YYYY-MM-DD）</label>
-            </div>
-            <div className="input-shell" data-error=${!!errors.date2}>
-              <input
-                id="date2"
-                name="date2"
-                type="date"
-                value=${values.date2}
-                onChange=${handleChange}
-                onBlur=${handleBlur}
-              />
-              <span className="input-error" aria-live="polite">
-                ${errors.date2 || ""}
+                ${errors.open || ""}
               </span>
             </div>
           </div>

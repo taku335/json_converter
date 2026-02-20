@@ -1,21 +1,23 @@
 export const forbiddenPattern = /[<>"'&]/;
 export const environmentDependentPattern = /[\u2460-\u24ff\u2150-\u218f\u3200-\u32ff\u3300-\u33ff\ud83c\udd00-\ud83c\uddff]/u;
-export const japanesePattern = /^[\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Han}\p{sc=Latin}\p{Nd}\s]+$/u;
+export const japanesePattern = /^[\p{sc=Hiragana}\p{sc=Katakana}\p{sc=Han}\p{sc=Latin}\p{Nd}\sー・]+$/u;
 
 export const initialValues = {
   name: "",
-  age: "",
-  bool: "",
-  date: "",
-  date2: "",
+  winners: "0",
+  fromDate: "",
+  toDate: "",
+  poolSize: "10000",
+  open: "",
 };
 
 export const normalizeValues = (values) => ({
   name: values.name.trim(),
-  age: values.age.trim(),
-  bool: values.bool,
-  date: values.date,
-  date2: values.date2,
+  winners: values.winners.trim(),
+  fromDate: values.fromDate,
+  toDate: values.toDate,
+  poolSize: values.poolSize.trim(),
+  open: values.open,
 });
 
 export const getValidation = (
@@ -57,32 +59,52 @@ export const getValidation = (
     valid = false;
   }
 
-  if (!normalized.age) {
-    if (!allowEmpty && shouldValidateRequired("age")) {
-      if (showErrors) {
-        errors.age = "年齢を入力してください。";
+  const validateRangeNumber = (field, value, { min, max, requiredMessage, rangeMessage }) => {
+    if (!value) {
+      if (!allowEmpty && shouldValidateRequired(field)) {
+        if (showErrors) {
+          errors[field] = requiredMessage;
+        }
+        valid = false;
       }
-      valid = false;
+      return;
     }
-  } else if (!/^\d+$/.test(normalized.age)) {
-    if (showErrors) {
-      errors.age = "数字のみ入力してください。";
-    }
-    valid = false;
-  } else {
-    const ageNumber = Number(normalized.age);
-    if (ageNumber < 1 || ageNumber > 10000) {
-      if (showErrors) {
-        errors.age = "1〜10000の範囲で入力してください。";
-      }
-      valid = false;
-    }
-  }
 
-  if (!normalized.bool) {
-    if (!allowEmpty && shouldValidateRequired("bool")) {
+    if (!/^\d+$/.test(value)) {
       if (showErrors) {
-        errors.bool = "true か false を選択してください。";
+        errors[field] = "数字のみ入力してください。";
+      }
+      valid = false;
+      return;
+    }
+
+    const numberValue = Number(value);
+    if (numberValue < min || numberValue > max) {
+      if (showErrors) {
+        errors[field] = rangeMessage;
+      }
+      valid = false;
+    }
+  };
+
+  validateRangeNumber("winners", normalized.winners, {
+    min: 0,
+    max: 10000,
+    requiredMessage: "プレゼント数を入力してください。",
+    rangeMessage: "0〜10000の範囲で入力してください。",
+  });
+
+  validateRangeNumber("poolSize", normalized.poolSize, {
+    min: 1,
+    max: 10000,
+    requiredMessage: "人数枠を入力してください。",
+    rangeMessage: "1〜10000の範囲で入力してください。",
+  });
+
+  if (!normalized.open) {
+    if (!allowEmpty && shouldValidateRequired("open")) {
+      if (showErrors) {
+        errors.open = "true か false を選択してください。";
       }
       valid = false;
     }
@@ -107,12 +129,12 @@ export const getValidation = (
     }
   };
 
-  validateDate("date", normalized.date);
-  validateDate("date2", normalized.date2);
+  validateDate("fromDate", normalized.fromDate);
+  validateDate("toDate", normalized.toDate);
 
-  if (normalized.date && normalized.date2 && normalized.date2 < normalized.date) {
+  if (normalized.fromDate && normalized.toDate && normalized.toDate < normalized.fromDate) {
     if (showErrors) {
-      errors.date2 = "日付1と同じ日付、または日付1より後の日付を入力してください。";
+      errors.toDate = "終了日は開始日と同じ日付、または後の日付を入力してください。";
     }
     valid = false;
   }
